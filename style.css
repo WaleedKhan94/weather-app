@@ -112,6 +112,86 @@ body {
   display: flex;
   font-size: 40px;
   padding-top: 1%;
+  justify-content: center; /* Center the heading */
+  margin-left: 0; /* Remove fixed margin */
+}
 
-  margin-left: 490px;
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .card {
+    padding: 30px 20px; /* Reduce padding for smaller screens */
+  }
+
+  .search input {
+    font-size: 16px; /* Reduce font size for smaller screens */
+    padding: 10px 15px;
+  }
+
+  .weather h1 {
+    font-size: 60px; /* Reduce font size for smaller screens */
+  }
+
+  .weather h2 {
+    font-size: 35px; /* Reduce font size for smaller screens */
+  }
+
+  .details {
+    flex-direction: column; /* Stack details vertically on small screens */
+    gap: 20px; /* Add space between columns */
+  }
+
+  .col img {
+    width: 30px; /* Reduce icon size for smaller screens */
+  }
+
+  .humidity,
+  .wind {
+    font-size: 24px; /* Reduce font size for smaller screens */
+  }
+
+  .heading {
+    font-size: 30px; /* Reduce heading font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    margin: 50px auto 0; /* Reduce top margin for very small screens */
+    padding: 20px 15px; /* Further reduce padding */
+  }
+
+  .search input {
+    height: 50px; /* Reduce input height */
+    font-size: 14px; /* Further reduce font size */
+  }
+
+  .search button {
+    width: 50px; /* Reduce button size */
+    height: 50px;
+  }
+
+  .weather h1 {
+    font-size: 50px; /* Further reduce font size */
+  }
+
+  .weather h2 {
+    font-size: 28px; /* Further reduce font size */
+  }
+
+  .weather-icon {
+    width: 120px; /* Reduce icon size */
+  }
+
+  .col img {
+    width: 25px; /* Further reduce icon size */
+  }
+
+  .humidity,
+  .wind {
+    font-size: 20px; /* Further reduce font size */
+  }
+
+  .heading {
+    font-size: 24px; /* Further reduce heading font size */
+  }
 }
