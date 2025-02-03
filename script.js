@@ -5,6 +5,7 @@ const apiUrl =
 const searchbox = document.querySelector(".search input");
 const searchbtn = document.querySelector(".search button");
 const weathericon = document.querySelector(".weather-icon");
+const currenthour = new Date().getHours();
 
 async function checkweather(city) {
   const responce = await fetch(apiUrl + city + `&appid=${apikey}`);
@@ -22,17 +23,24 @@ async function checkweather(city) {
     document.querySelector(".wind").innerHTML =
       Math.round(data.wind.speed) + " Km/h";
 
-    if (data.weather[0].main == "Clear") {
-      weathericon.src = "images/clear.png";
-    } else if (data.weather[0].main == "Clouds") {
-      weathericon.src = "images/clouds.png";
-    } else if (data.weather[0].main == "Rain") {
+    const weatherCondition = data.weather[0].main;
+    const isDaytime = currenthour >= 6 && currenthour < 18;
+
+    if (weatherCondition == "Clear") {
+      weathericon.src = isDaytime ? "images/clear.png" : "images/moon.png";
+    } else if (weatherCondition == "Clouds") {
+      weathericon.src = isDaytime
+        ? "images/clouds.png"
+        : "images/cloudy-night.png";
+    } else if (weatherCondition == "Rain") {
       weathericon.src = "images/rain.png";
-    } else if (data.weather[0].main == "Drizzle") {
-      weathericon.src = "images/drizzle.png";
-    } else if (data.weather[0].main == "Mist") {
+    } else if (weatherCondition == "Drizzle") {
+      weathericon.src = isDaytime
+        ? "images/drizzle.png"
+        : "images/night-drizzle.png";
+    } else if (weatherCondition == "Mist") {
       weathericon.src = "images/mist.png";
-    } else if (data.weather[0].main == "Snow") {
+    } else if (weatherCondition == "Snow") {
       weathericon.src = "images/snow.png";
     }
 
