@@ -22,6 +22,7 @@ async function checkweather(city) {
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
     document.querySelector(".wind").innerHTML =
       Math.round(data.wind.speed) + " Km/h";
+    console.log(data);
 
     const weatherCondition = data.weather[0].main;
     const isDaytime = currenthour >= 6 && currenthour < 18;
@@ -51,6 +52,12 @@ async function checkweather(city) {
 
 searchbtn.addEventListener("click", () => {
   checkweather(searchbox.value);
+});
+
+searchbox.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    checkweather(searchbox.value);
+  }
 });
 
 checkweather();
