@@ -22,25 +22,37 @@ async function checkweather(city) {
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
     document.querySelector(".wind").innerHTML =
       Math.round(data.wind.speed) + " Km/h";
+
     console.log(data);
 
+    // Getting time from openwhether api
+    const timezoneOffset = data.timezone * 1000;
+    // Get current UTC time in milliseconds
+    const utcTime =
+      new Date().getTime() + new Date().getTimezoneOffset() * 60000;
+    // Calculate local time for the city
+    const localTime = new Date(utcTime + timezoneOffset);
+    const localHour = localTime.getHours();
+    // console.log("Local hour in", data.name, "is:", localHour);
+
     const weatherCondition = data.weather[0].main;
-    const isDaytime = currenthour >= 6 && currenthour < 18;
+    // const isDaytime = currenthour >= 6 && currenthour < 18;
+    const isDaytime = localHour >= 6 && localHour < 18; // Daytime is between 6 AM and 6 PM
 
     if (weatherCondition == "Clear") {
-      weathericon.src = isDaytime ? "images/clear.png" : "images/moon.png";
+      weathericon.src = isDaytime ? "images/clear.svg" : "images/moon.svg";
     } else if (weatherCondition == "Clouds") {
       weathericon.src = isDaytime
-        ? "images/clouds.png"
-        : "images/cloudy-night.png";
+        ? "images/clouds.svg"
+        : "images/cloudy-night.svg";
     } else if (weatherCondition == "Rain") {
-      weathericon.src = "images/rain.png";
+      weathericon.src = "images/rain.svg";
     } else if (weatherCondition == "Drizzle") {
       weathericon.src = isDaytime
         ? "images/drizzle.png"
         : "images/night-drizzle.png";
     } else if (weatherCondition == "Mist") {
-      weathericon.src = "images/mist.png";
+      weathericon.src = isDaytime ? "images/mist.svg" : "images/night-mist.svg";
     } else if (weatherCondition == "Snow") {
       weathericon.src = "images/snow.png";
     }
@@ -60,4 +72,4 @@ searchbox.addEventListener("keydown", (event) => {
   }
 });
 
-checkweather();
+// checkweather();
